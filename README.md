@@ -69,70 +69,12 @@ c.close()
 ## OUPUT - ARP
 ### server
 
-<img width="930" height="281" alt="Screenshot 2025-10-14 082203" src="https://github.com/user-attachments/assets/080751c0-756e-4602-8dee-10347546563e" />
+<img width="736" height="141" alt="cn2c s" src="https://github.com/user-attachments/assets/4cbee2f1-c033-4439-b8b1-125c25c439de" />
 
 
 ### client
 
-<img width="930" height="293" alt="Screenshot 2025-10-14 082253" src="https://github.com/user-attachments/assets/9dd8a27a-29b4-43c5-b629-ce138473d2e3" />
-
-
-## PROGRAM - RARP
-### server
-```
-import socket
-s = socket.socket()
-s.bind(('localhost', 8000))
-s.listen(5)
-print("Server is listening for RARP requests...")
-c, addr = s.accept()
-print(f"Connection established with {addr}")
-
-rarp_table = {
-    "6A:08:AA:C2": "165.165.80.80",
-    "8A:BC:E3:FA": "165.165.79.1"
-}
-
-while True:
-    mac = c.recv(1024).decode()
-
-    if not mac:  
-        break
-
-    try:
-        ip = rarp_table[mac]  
-        print(f"MAC: {mac} -> IP: {ip}")
-        c.send(ip.encode())  
-    except KeyError:
-        print(f"MAC: {mac} not found in RARP table.")
-        c.send("Not Found".encode())
-c.close()
-s.close()
-```
-### client
-```
-import socket
-c = socket.socket()
-c.connect(('localhost', 8000))
-
-while True:
-    mac = input("Enter MAC address to find IP (or type 'exit' to quit): ")
-    if mac.lower() == "exit":  
-        break
-    c.send(mac.encode())
-    ip = c.recv(1024).decode()
-    print(f"IP Address for {mac}: {ip}")
-c.close()
-
-```
-
-
-## OUPUT -RARP
-### server
-<img width="935" height="251" alt="Screenshot 2025-10-14 083139" src="https://github.com/user-attachments/assets/bcca2064-da07-4bc0-b4e9-2b8345c23948" />
-
-### client
-<img width="940" height="260" alt="Screenshot 2025-10-14 083225" src="https://github.com/user-attachments/assets/3e307541-8e6d-4e6d-9504-b8d847a1382c" />
+<img width="861" height="160" alt="ex2c c" src="https://github.com/user-attachments/assets/66518460-9b00-4353-ab51-7b024c0921cf" />
 
 
 ## RESULT
